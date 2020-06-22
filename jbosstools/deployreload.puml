@@ -1,0 +1,35 @@
+@startuml
+autonumber
+
+actor user
+
+user -> IDE: start-app
+IDE -> disk: full-build if necessary
+IDE -> container: launch
+container -> runtime: launch
+runtime -> deployedapp: start-watch
+IDE -> deployedapp: initial-build-deploy
+user -> IDE: save/content assist
+IDE -> disk: load symbols
+user -> IDE: save
+activate IDE #DarkSalmon
+
+IDE -> IDE: build
+IDE -> disk: update
+IDE -> deployedapp: oc-rsync
+
+alt change requires restart
+IDE -> runtime: restart
+IDE -> container: restart
+else change can be reloaded
+deployedapp -> runtime: trigger-watch
+runtime -> deployedapp: reload
+end
+
+user -> container: browse
+deactivate IDE
+container -> runtime: getcontent
+container -> user: showresult
+
+
+@enduml
