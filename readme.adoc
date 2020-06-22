@@ -3,9 +3,9 @@
 To build the docs install https://jbang.dev/download[jbang]
 and setup the following alias:
 
-````
+```
 jbang --trust https://github.com/jbangdev
 jbang --alias asciidoctor https://github.com/jbangdev/jbang/blob/master/examples/asciidoctor.java 
-````
+```
 
 now you can do `jbang asciidoctor .` and it will traverse for `.adoc` files and render them.
